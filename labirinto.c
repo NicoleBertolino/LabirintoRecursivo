@@ -63,6 +63,11 @@ void acharSaida(Labirinto **Labirinto)
     int TAM = contEspaco(Labirinto);
     printf("EspacoVazio: %d", TAM);
 
+    Percurso *percurso = (Percurso*)malloc(sizeof(Percurso));
+    percurso->posicao = malloc(TAM * sizeof(Posicao));
+
+    //for(int i = 0; i< TAM; i++)
+    //    printf("%d", percurso->posicao[i].x);
 
     encontraRato(Labirinto, &pAtual);
     // percurso[0].posicao->x = pAtual->x;
@@ -105,6 +110,9 @@ void acharSaida(Labirinto **Labirinto)
     // printf("Comprimento: %d\n", percurso->compDoPercurso);
     // for (int i = 0; i < percurso->compDoPercurso; i++)
     //     printf("%d, %d", percurso[i].posicao->x, percurso[i].posicao->y);
+
+    free((*percurso).posicao);
+    free(percurso);
 }
 
 void encontraRato(Labirinto **labirinto, Posicao **pAtual)
