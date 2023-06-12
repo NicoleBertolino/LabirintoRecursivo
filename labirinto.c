@@ -59,15 +59,20 @@ void acharSaida(Labirinto **Labirinto)
 {
     Posicao *pPossivel;
     Posicao *pAtual;
+    Percurso *percurso;
 
     int TAM = contEspaco(Labirinto);
     printf("EspacoVazio: %d", TAM);
 
-    Percurso *percurso = (Percurso*)malloc(sizeof(Percurso));
+    percurso = (Percurso *)malloc(sizeof(Percurso));
     percurso->posicao = malloc(TAM * sizeof(Posicao));
+    if(percurso == NULL)
+    {
+        printf("Erro na alocação movimentaRato()");
+    }
 
-    //for(int i = 0; i< TAM; i++)
-    //    printf("%d", percurso->posicao[i].x);
+    // for(int i = 0; i< TAM; i++)
+    //     printf("%d", percurso->posicao[i].x);
 
     encontraRato(Labirinto, &pAtual);
     // percurso[0].posicao->x = pAtual->x;
@@ -75,21 +80,21 @@ void acharSaida(Labirinto **Labirinto)
     // percurso[0].compDoPercurso = 0;
     imprimePercursoNoLabirinto(Labirinto);
     encontraCaminho(Labirinto, &pPossivel, pAtual);
-    movimentaRato(Labirinto, &pPossivel, pAtual /*,&percurso*/);
+    movimentaRato(Labirinto, &pPossivel, pAtual, &percurso);
     imprimePercursoNoLabirinto(Labirinto);
     sleep(2);
     // system("clear");
 
     encontraRato(Labirinto, &pAtual);
     encontraCaminho(Labirinto, &pPossivel, pAtual);
-    movimentaRato(Labirinto, &pPossivel, pAtual /*, &percurso*/);
+    movimentaRato(Labirinto, &pPossivel, pAtual, &percurso);
     imprimePercursoNoLabirinto(Labirinto);
     sleep(2);
     // system("clear");
 
     encontraRato(Labirinto, &pAtual);
     encontraCaminho(Labirinto, &pPossivel, pAtual);
-    movimentaRato(Labirinto, &pPossivel, pAtual /*, &percurso*/);
+    movimentaRato(Labirinto, &pPossivel, pAtual, &percurso);
     imprimePercursoNoLabirinto(Labirinto);
     // sleep(2);
     // system("clear");
@@ -110,7 +115,6 @@ void acharSaida(Labirinto **Labirinto)
     // printf("Comprimento: %d\n", percurso->compDoPercurso);
     // for (int i = 0; i < percurso->compDoPercurso; i++)
     //     printf("%d, %d", percurso[i].posicao->x, percurso[i].posicao->y);
-
     free((*percurso).posicao);
     free(percurso);
 }
@@ -167,7 +171,7 @@ void encontraCaminho(Labirinto **labirinto, Posicao **pPossivel, Posicao *pAtual
     (*pPossivel)[3].y = paraCima ? pAtual->y : -1;
 }
 
-void movimentaRato(Labirinto **labirinto, Posicao **pPossivel, Posicao *pAtual /* ,Percurso **percurso*/)
+void movimentaRato(Labirinto **labirinto, Posicao **pPossivel, Posicao *pAtual, Percurso **percurso)
 {
     int peso = 0;
     int index = 0;
@@ -186,6 +190,21 @@ void movimentaRato(Labirinto **labirinto, Posicao **pPossivel, Posicao *pAtual /
         }
     }
     printf("%d", index);
+
+    // Guarda a posição no vetor
+    if (index == 0)
+    {
+         (*percurso)->posicao[0].x = pAtual->x;
+         (*percurso)->posicao[0].y = pAtual->y;
+         (*percurso)->compDoPercurso = 0;
+    }
+    (*percurso)->posicao[index].x = pAtual->x;
+    (*percurso)->posicao[index].y = pAtual->y;
+    (*percurso)->compDoPercurso++;
+
+    printf("x: %d y: %d", (*percurso)->posicao[index].x, (*percurso)->posicao[index].y);
+
+
     // Altera a posição do Rato
     (*labirinto)->maze[pAtual->x][pAtual->y] = ' ';
     (*labirinto)->maze[(*pPossivel)[index].x][(*pPossivel)[index].y] = 'M';

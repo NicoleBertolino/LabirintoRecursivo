@@ -23,7 +23,7 @@ void imprimeCoordenadas();
 void acharSaida(Labirinto** labirinto);
 void encontraRato(Labirinto** labirinto, Posicao** pAtual);
 void encontraCaminho(Labirinto **labirinto, Posicao **pPossivel, Posicao *pAtual);
-void movimentaRato(Labirinto **labirinto, Posicao **pPossivel, Posicao *pAtual/* ,Percurso **percurso*/);
+void movimentaRato(Labirinto **labirinto, Posicao **pPossivel, Posicao *pAtual, Percurso **percurso);
 int contEspaco(Labirinto **labirinto);
 
 #endif 
