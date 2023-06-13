@@ -51,22 +51,18 @@ void imprimePercursoNoLabirinto(Labirinto **labirinto, char opImpressao, Percurs
             printf("\n");
         }
     }
+    //imprimindo caminho por coordenadas 
     else if (opImpressao == 'c')
     {
-       // int comprimento = (*percurso)->compDoPercurso;
-        //  printf("\n%d\n", (*percurso)->compDoPercurso);
-        // if (comprimento <= 1)
-        // printf("\nAQUI%d\n", comprimento);
-        // printf("\n++++++\n");
-        // int j = 0;
-        // while (j < comprimento)
-        // {
-        //     printf("\nAQUI%d\n", comprimento);
-        //     j++;
-        // }
-        //   for (int i = 0; i < comprimento; i++)
+        int comprimento = (*percurso)->compDoPercurso;
+        printf("%d\n", comprimento);
 
-      //   printf("\n%d, %d\n", (*percurso)->posicao[comprimento].x, (*percurso)->posicao[comprimento].y);
+        int j = 0;
+        while (j < comprimento)
+        {
+            printf("%d, %d\n", (*percurso)->posicao[j].x, (*percurso)->posicao[j].y);
+            j++;
+        }
     }
 }
 
@@ -95,14 +91,14 @@ void acharSaida(Labirinto **Labirinto, char opImpressao)
     encontraRato(Labirinto, &pAtual);
     encontraCaminho(Labirinto, &pPossivel, pAtual);
     movimentaRato(Labirinto, &pPossivel, pAtual, &percurso);
-    imprimePercursoNoLabirinto(Labirinto, opImpressao, &percurso);
+    //  imprimePercursoNoLabirinto(Labirinto, opImpressao, &percurso);
     sleep(2);
     // system("clear");
 
     encontraRato(Labirinto, &pAtual);
     encontraCaminho(Labirinto, &pPossivel, pAtual);
     movimentaRato(Labirinto, &pPossivel, pAtual, &percurso);
-    imprimePercursoNoLabirinto(Labirinto, opImpressao, &percurso);
+    // imprimePercursoNoLabirinto(Labirinto, opImpressao, &percurso);
     sleep(2);
     // system("clear");
 
@@ -210,9 +206,9 @@ void movimentaRato(Labirinto **labirinto, Posicao **pPossivel, Posicao *pAtual, 
         (*percurso)->posicao[0].x = pAtual->x;
         (*percurso)->posicao[0].y = pAtual->y;
     }
-    (*percurso)->posicao[index].x = pAtual->x;
-    (*percurso)->posicao[index].y = pAtual->y;
-    (*percurso)->compDoPercurso++;
+    (*percurso)->posicao[(*percurso)->compDoPercurso].x = pAtual->x;
+    (*percurso)->posicao[(*percurso)->compDoPercurso].y = pAtual->y;
+    (*percurso)->compDoPercurso = (*percurso)->compDoPercurso + 1;
 
     // Altera a posição do Rato
     (*labirinto)->maze[pAtual->x][pAtual->y] = ' ';
