@@ -18,9 +18,9 @@ typedef struct {
 Labirinto* alocarLabirinto(int* linhas, int*colunas);
 void desalocarLabirinto(Labirinto** labirinto);
 void leLabirinto(Labirinto** labirinto);
-void imprimePercursoNoLabirinto(Labirinto** labirinto);
+void imprimePercursoNoLabirinto(Labirinto **labirinto, char opImpressao, Percurso **percurso);
 void imprimeCoordenadas();
-void acharSaida(Labirinto** labirinto);
+void acharSaida(Labirinto** labirinto, char opImpressao);
 void encontraRato(Labirinto** labirinto, Posicao** pAtual);
 void encontraCaminho(Labirinto **labirinto, Posicao **pPossivel, Posicao *pAtual);
 void movimentaRato(Labirinto **labirinto, Posicao **pPossivel, Posicao *pAtual, Percurso **percurso);

@@ -21,7 +21,7 @@ int main()
     leLabirinto(&labirinto);
 
     // funcao que encontra a saida mais rapida
-    acharSaida(&labirinto);
+    acharSaida(&labirinto, opImpressao);
     
 
 
