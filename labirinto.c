@@ -51,7 +51,7 @@ void imprimePercursoNoLabirinto(Labirinto **labirinto, char opImpressao, Percurs
             printf("\n");
         }
     }
-    //imprimindo caminho por coordenadas 
+    // imprimindo caminho por coordenadas
     else if (opImpressao == 'c')
     {
         int comprimento = (*percurso)->compDoPercurso;
@@ -211,7 +211,7 @@ void movimentaRato(Labirinto **labirinto, Posicao **pPossivel, Posicao *pAtual, 
     (*percurso)->compDoPercurso = (*percurso)->compDoPercurso + 1;
 
     // Altera a posição do Rato
-    (*labirinto)->maze[pAtual->x][pAtual->y] = ' ';
+    (*labirinto)->maze[pAtual->x][pAtual->y] = 'v';
     (*labirinto)->maze[(*pPossivel)[index].x][(*pPossivel)[index].y] = 'M';
 
     free(*pPossivel);
@@ -231,3 +231,27 @@ int contEspaco(Labirinto **labirinto)
     }
     return contador;
 }
+
+/*int MEtodoresult(int maxLinha, int maxColuna, int linhapAtual, int colunapAtual)//posicao atual do arato
+{
+    char result;
+    if ((linhapAtual > maxLinha) || (linhapAtual < 0) || (colunapAtual > maxColuna) || (colunapAtual < 0))
+    {
+        result = false;
+    }
+    else if ((matriz[pLinhaAtua][pColunaAtual] == '*') || (matriz[pLinhaAtua][pColunaAtual] == 'v'))
+    {
+        result = false;
+    }
+    else if (matriz[pLinhaAtua][pColunaAtual] == pPossivel)
+    {
+        movimentaRato();
+        result = encontraCaminho();
+    }
+    if (result == true)
+    {
+        printf(linhapAtual, colunapAtual);
+        Metodoresult(linhapAtual, colunapAtual);
+    }
+    return result;
+}*/
