@@ -179,35 +179,23 @@ void encontraCaminho(Labirinto **labirinto, Posicao **pPossivel, Posicao *pAtual
         return;
     }
 
-    // // verifica caminho para a direita (y + 1]) e -1 para parede
-    // int paraDireita = (pAtual->y < (*labirinto)->colunas && (*labirinto)->maze[pAtual->x][pAtual->y + 1] != '*');
-    // (*pPossivel)[0].x = paraDireita ? pAtual->x : -1;
-    // (*pPossivel)[0].y = paraDireita ? pAtual->y + 1 : -1;
-
-    // // verifica caminho para a esquerda (y - 1) e -1 para parede
-    // int paraEsquerda = (pAtual->y > 0 && (*labirinto)->maze[pAtual->x][pAtual->y - 1] != '*');
-    // (*pPossivel)[2].x = paraEsquerda ? pAtual->x : -1;
-    // (*pPossivel)[2].y = paraEsquerda ? pAtual->y - 1 : -1;
-
-//estou verificando se a proxima posicao é diferente de * e se a anterior é diferente de v só que ele ta conferindo a anterior daquela posição por exemplo 
-//se ele quiser descer ele confere a linha de cima mas quando ele vira se ele confere a linha de cima ele anda pra baixo pois não tem v na linha de cima e sim na do lado
     // verifica caminho para baixo (x + 1) e -1 para parede
-    int paraBaixo = (pAtual->x < (*labirinto)->linhas && ((*labirinto)->maze[pAtual->x + 1][pAtual->y] != '*' || (*labirinto)->maze[pAtual->x - 1][pAtual->y] != 'v'));
+    int paraBaixo = (pAtual->x < (*labirinto)->linhas && ((*labirinto)->maze[pAtual->x + 1][pAtual->y] != '*' ));
     (*pPossivel)[0].x = paraBaixo ? pAtual->x + 1 : -1;
     (*pPossivel)[0].y = paraBaixo ? pAtual->y : -1;
 
     // verifica caminho para cima (x - 1) e -1 para parede
-    int paraCima = (pAtual->x > 0 && ((*labirinto)->maze[pAtual->x - 1][pAtual->y] != '*' || (*labirinto)->maze[pAtual->x + 1][pAtual->y] != 'v'));
+    int paraCima = (pAtual->x > 0 && ((*labirinto)->maze[pAtual->x - 1][pAtual->y] != '*'));
     (*pPossivel)[3].x = paraCima ? pAtual->x - 1 : -1;
     (*pPossivel)[3].y = paraCima ? pAtual->y : -1;
 
      // verifica caminho para a direita (y + 1]) e -1 para parede
-    int paraDireita = (pAtual->y < (*labirinto)->colunas && ((*labirinto)->maze[pAtual->x][pAtual->y + 1] != '*' || (*labirinto)->maze[pAtual->x][pAtual->y - 1] != 'v'));
+    int paraDireita = (pAtual->y < (*labirinto)->colunas && ((*labirinto)->maze[pAtual->x][pAtual->y + 1] != '*'));
     (*pPossivel)[1].x = paraDireita ? pAtual->x : -1;
     (*pPossivel)[1].y = paraDireita ? pAtual->y + 1 : -1;
 
     // verifica caminho para a esquerda (y - 1) e -1 para parede
-    int paraEsquerda = (pAtual->y > 0 && ((*labirinto)->maze[pAtual->x][pAtual->y - 1] != '*' || (*labirinto)->maze[pAtual->x][pAtual->y + 1] != 'v'));
+    int paraEsquerda = (pAtual->y > 0 && ((*labirinto)->maze[pAtual->x][pAtual->y - 1] != '*'));
     (*pPossivel)[2].x = paraEsquerda ? pAtual->x : -1;
     (*pPossivel)[2].y = paraEsquerda ? pAtual->y - 1 : -1;
 }
@@ -221,13 +209,15 @@ int pegaMelhorCaminho(Labirinto **labirinto, Posicao **pPossivel)
     {
         if ((*pPossivel)[i].x != -1 && (*pPossivel)[i].y != -1)
         {
-            int aux = (*pPossivel)[i].x + (*pPossivel)[i].y;
-            linha = (*pPossivel)[i].x;
-            coluna = (*pPossivel)[i].y;
-            if (peso < aux && ((*labirinto)->maze[linha][coluna] != 'v'))
-            {
-                peso = linha + coluna;
-                index = i;
+            if((*labirinto)->maze[(*pPossivel)[i].x][(*pPossivel)[i].y] != 'v'){
+                int aux = (*pPossivel)[i].x + (*pPossivel)[i].y;
+                linha = (*pPossivel)[i].x;
+                coluna = (*pPossivel)[i].y;
+                if (peso < aux && ((*labirinto)->maze[linha][coluna] != 'v'))
+                {
+                    peso = linha + coluna;
+                    index = i;
+                }
             }
         }
     }
