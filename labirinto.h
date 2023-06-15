@@ -25,6 +25,5 @@ void encontraRato(Labirinto** labirinto, Posicao** pAtual);
 void encontraCaminho(Labirinto **labirinto, Posicao **pPossivel, Posicao **pAtual);
 void movimentaRato(Labirinto **labirinto, Posicao **pPossivel, Posicao **pAtual, Percurso **percurso);
 int contEspaco(Labirinto **labirinto);
-//int andaRato(Labirinto **labirinto, Posicao *pAtual, Posicao **pPossivel, Percurso **percurso, char opImpressao);
 void andaRato(Labirinto **labirinto, Posicao **pAtual, Posicao **pPossivel, int *retorno, Percurso **percurso, int opImpressao);
 #endif 

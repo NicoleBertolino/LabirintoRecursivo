@@ -97,49 +97,10 @@ void acharSaida(Labirinto **labirinto, char opImpressao)
     {
         printf("\nEPIC FAIL!\n");
     }
-    // for (int i = 0; i < 27; i++)
-    // {
-    //     encontraRato(labirinto, &pAtual);
-    //     // printf("\nPosicao atual x:%d Posicao atual y: %d\n", (*pAtual).x, (*pAtual).y);
-
-    //     andaRato(labirinto, &pAtual, &pPossivel, &result);
-    //     encontraCaminho(labirinto, &pPossivel, pAtual);
-    //     movimentaRato(labirinto, &pPossivel, pAtual, &percurso);
-    //     imprimePercursoNoLabirinto(labirinto, opImpressao, &percurso);
-    //     sleep(2);
-    //     // system("clear");
-    // }
-
-    // int resultado = andaRato(labirinto, &pAtual, &pPossivel, &percurso, opImpressao);
-    // printf("REsultado %d", resultado);
 
     free((*percurso).posicao);
     free(percurso);
 }
-
-// int andaRato(Labirinto **labirinto, Posicao **pAtual, Posicao **pPossivel, Percurso **percurso, char opImpressao)
-// {
-//     if ((*pAtual)->x == (*labirinto)->linhas && (*pAtual)->y == (*labirinto)->colunas)
-//     {
-//         printf("Achou a saida");
-//         return 1;
-//     }
-//     else if ((*pPossivel)->x == -1 && (*pPossivel)->y == -1)
-//     {
-//         printf("EPIC FAIL!");
-//         return -1;
-//     }
-//     else
-//     {
-//         encontraRato(labirinto, &pAtual);
-//         encontraCaminho(labirinto, &pPossivel, pAtual);
-//         movimentaRato(labirinto, &pPossivel, pAtual, &percurso);
-//         imprimePercursoNoLabirinto(labirinto, opImpressao, &percurso);
-//         sleep(2);
-//         system("clear");
-//         andaRato(&labirinto, &pAtual, &pPossivel, &percurso, opImpressao);
-//     }
-// }
 
 void andaRato(Labirinto **labirinto, Posicao **pAtual, Posicao **pPossivel, int *retorno, Percurso **percurso, int opImpressao)
 {
@@ -157,29 +118,29 @@ void andaRato(Labirinto **labirinto, Posicao **pAtual, Posicao **pPossivel, int 
     }
     if ((*pAtual)->x == ((*labirinto)->linhas - 2) && (*pAtual)->y == ((*labirinto)->colunas - 2))
     {
-             printf("ENTROU");
+        printf("ENTROU");
         //     printf("\nPosicao atual x:%d Posicao atual y: %d", (*pAtual)->x, (*pAtual)->y);
         //    // sleep(5);
-        //     free(*pPossivel);
+             free(*pPossivel);
         //     free((*percurso)->posicao);
         //     free(percurso);
-        //     free((*pAtual));
+             free((*pAtual));
         *retorno = 1;
-         printf("3");
+        printf("3");
     }
-
     else if (*retorno != -1 && *retorno != 1)
     {
+        free(*pPossivel);
+        free((*pAtual));
         encontraRato(labirinto, pAtual);
-        // printf("\nPosicao atual x:%d Posicao atual y: %d\n", (*pAtual).x, (*pAtual).y);
         encontraCaminho(labirinto, pPossivel, pAtual);
         movimentaRato(labirinto, pPossivel, pAtual, percurso);
         imprimePercursoNoLabirinto(labirinto, opImpressao, percurso);
-         sleep(1);
+        sleep(1);
         andaRato(labirinto, pAtual, pPossivel, retorno, percurso, opImpressao);
     }
-    free(*pPossivel);
-    free((*pAtual));
+    //free(*pPossivel);
+    //free((*pAtual));
     printf("4");
 }
 
@@ -301,27 +262,3 @@ int contEspaco(Labirinto **labirinto)
     }
     return contador;
 }
-
-/*int MEtodoresult(int maxLinha, int maxColuna, int linhapAtual, int colunapAtual)//posicao atual do arato
-{
-    char result;
-    if ((linhapAtual > maxLinha) || (linhapAtual < 0) || (colunapAtual > maxColuna) || (colunapAtual < 0))
-    {
-        result = false;
-    }
-    else if ((matriz[pLinhaAtua][pColunaAtual] == '*') || (matriz[pLinhaAtua][pColunaAtual] == 'v'))
-    {
-        result = false;
-    }
-    else if (matriz[pLinhaAtua][pColunaAtual] == pPossivel)
-    {
-        movimentaRato();
-        result = encontraCaminho();
-    }
-    if (result == true)
-    {
-        printf(linhapAtual, colunapAtual);
-        Metodoresult(linhapAtual, colunapAtual);
-    }
-    return result;
-}*/
