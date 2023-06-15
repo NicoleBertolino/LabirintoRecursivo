@@ -22,8 +22,6 @@ int main()
 
     // funcao que encontra a saida mais rapida
     acharSaida(&labirinto, opImpressao);
-    
-
 
     desalocarLabirinto(&labirinto);
 

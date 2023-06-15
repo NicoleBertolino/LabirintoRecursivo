@@ -118,15 +118,9 @@ void andaRato(Labirinto **labirinto, Posicao **pAtual, Posicao **pPossivel, int 
     }
     if ((*pAtual)->x == ((*labirinto)->linhas - 2) && (*pAtual)->y == ((*labirinto)->colunas - 2))
     {
-        printf("ENTROU");
-        //     printf("\nPosicao atual x:%d Posicao atual y: %d", (*pAtual)->x, (*pAtual)->y);
-        //    // sleep(5);
-             free(*pPossivel);
-        //     free((*percurso)->posicao);
-        //     free(percurso);
-             free((*pAtual));
+        free(*pPossivel);
+        free((*pAtual));
         *retorno = 1;
-        printf("3");
     }
     else if (*retorno != -1 && *retorno != 1)
     {
@@ -139,13 +133,6 @@ void andaRato(Labirinto **labirinto, Posicao **pAtual, Posicao **pPossivel, int 
         sleep(1);
         andaRato(labirinto, pAtual, pPossivel, retorno, percurso, opImpressao);
     }
-    //free(*pPossivel);
-    //free((*pAtual));
-    printf("4");
-}
-
-void voltaprabifurcacao()
-{
 }
 
 void encontraRato(Labirinto **labirinto, Posicao **pAtual)
